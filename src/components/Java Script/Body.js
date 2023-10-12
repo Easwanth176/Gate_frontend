@@ -7,7 +7,9 @@ import data from '../Images/dsa.jpg';
 import database from '../Images/database.jpg';
 import ml from '../Images/ml.jpg';
 import ai from '../Images/ai.jpg';
+import bhav from '../Images/bhav.png';
 import { Link } from 'react-router-dom';
+
 
 export default function Body() {
   const topics = [
@@ -57,7 +59,13 @@ export default function Body() {
 
   return (
     <div className="container">
-      <h1 className="text-center mt-4">Welcome Bhavana</h1>
+      
+      <h1 className="text-center mt-4"><span><img
+        src={bhav}
+        className="img-fluid"
+        style={{ width: '50px', height: '50px', marginRight: '12px'  }} 
+      />Welcome Bhavana </span>
+      </h1>
       <div className="row mt-4">
         {topics.map((topic, index) => (
           <div className="col-lg-4 col-md-6 mb-4" key={index}>

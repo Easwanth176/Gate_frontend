@@ -1,0 +1,108 @@
+  .card {
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+    transition: box-shadow 0.3s;
+  }
+  
+  .card:hover {
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  }
+  
+  .card.completed {
+    background-color: #afe09a; /* Green background for completed topics */
+  }
+  
+  .card-body {
+    padding: 10px;
+  }
+  
+  .card-title {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .card-text {
+    font-size: 16px;
+    color: #333;
+  }
+  
+  
+  label {
+    font-size: 16px;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+  }
+  
+  input[type="checkbox"] {
+    margin-right: 10px;
+    appearance: none;
+    width: 1.6rem; /* Adjust width here */
+    height: 1.6rem; /* Adjust height here */
+    border: 2px solid #000;
+    border-radius: 3px;
+    outline: none;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.2s ease-in-out;
+  }
+  
+  /* PDF viewer styles */
+  .react-pdf__Page {
+    margin: 20px 0;
+  }
+  
+  /* Add more styles as needed for specific layout and design adjustments */
+  /* Loading spinner */
+.spinner-border {
+    display: inline-block; /* Display as an inline element */
+    width: 3rem; /* Set the width of the spinner */
+    height: 3rem; /* Set the height of the spinner */
+    border-width: 3px; /* Set the border width */
+    border-color: #007bff transparent transparent transparent; /* Set the border color */
+    animation: spin 1s linear infinite; /* Apply a rotation animation */
+  }
+  
+  /* Rotation animation */
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg); /* Start rotation at 0 degrees */
+    }
+    100% {
+      transform: rotate(360deg); /* End rotation at 360 degrees (full circle) */
+    }
+  }
+  .alert.alert-danger {
+    margin-top: 20px; /* Add some space between the spinner and the error message */
+    padding: 15px;
+    background-color: #f8d7da; /* Red background for error message */
+    border: 1px solid #f5c6cb; /* Red border for error message */
+    color: #721c24; /* Dark red text color for error message */
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 18px; /* Increase font size for better visibility */
+  }
+
+  /* Add this CSS to your Topics.css or a separate stylesheet */
+.btn.btn-secondary {
+    margin-right: 0.5rem;
+  background-color: #6c757d;
+  border-color: #6c757d;
+  border-radius: 5px;
+    margin-right: 10px;
+    font-size: 16px;
+  }
+  
+  .btn.btn-secondary:hover {
+    background-color: #5a6268;
+  border-color: #545b62;
+  }
+  .custom-checkbox {
+    transform: scale(1.5); 
+    margin-right: 10px;  
+    font-size: 16px;
+  }
+  

@@ -1,36 +1,59 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../CSS/Entry.css";
-
-import { Navbar, Nav, NavDropdown } from "react-bootstrap";
-import { Link } from "react-router-dom"; 
-
+import { Navbar, Nav } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const navLinkStyle = {
-  fontSize: '17px',
+  fontSize: "19px",
 };
 
 export default function MyNavbar() {
+  const handleLinkClick = () => {
+    const navbarToggler = document.querySelector(".navbar-toggler");
+    if (navbarToggler) {
+      navbarToggler.click();
+    }
+  };
+
   return (
     <Navbar bg="light" expand="lg">
-      <Navbar.Brand href="https://gate.iitkgp.ac.in/">
-        Gate Preparation
-      </Navbar.Brand>
+      <Navbar.Brand href="/">Gate Preparation</Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
-          <Link to="/Body" className="nav-link" style={navLinkStyle}>
+          <Link
+            to="/"
+            className="nav-link"
+            style={navLinkStyle}
+            onClick={handleLinkClick}
+          >
             Home
           </Link>
-          <Link to="/Video" className="nav-link" style={navLinkStyle}>
-          video
+          <Link
+            to="/video"
+            className="nav-link"
+            style={navLinkStyle}
+            onClick={handleLinkClick}
+          >
+            Videos
           </Link>
-          <Nav.Link href="#" style={navLinkStyle}>
-            Documents
-          </Nav.Link>
-          <Nav.Link href="#" style={navLinkStyle}>
-            Test
-          </Nav.Link>
+          <Link
+            to="/notes"
+            className="nav-link"
+            style={navLinkStyle}
+            onClick={handleLinkClick}
+          >
+            Notes
+          </Link>
+          <Link
+            to="/mock-test"
+            className="nav-link"
+            style={navLinkStyle}
+            onClick={handleLinkClick}
+          >
+            Mock Test
+          </Link>
         </Nav>
       </Navbar.Collapse>
     </Navbar>

@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link, useParams } from 'react-router-dom';
 import { Document, Page, pdfjs } from 'react-pdf';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faYoutube } from '@fortawesome/free-brands-svg-icons';
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 import '../CSS/Topics.css';
 
@@ -9,6 +11,8 @@ pdfjs.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pd
 
 export default function Topics() {
   const [topics, setTopics] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [numPages, setNumPages] = useState(null);
   const [currentTopicPdf, setCurrentTopicPdf] = useState(null);
   const { topicName } = useParams();
@@ -18,9 +22,12 @@ export default function Topics() {
       .get(`https://gate-backend.onrender.com/topics/${topicName}`)
       .then((response) => {
         setTopics(response.data);
+        setLoading(false);
       })
       .catch((error) => {
         console.error('Error fetching topics:', error);
+        setError('Failed to load data. Please try again later.');
+        setLoading(false);
       });
   }, [topicName]);
 
@@ -29,7 +36,6 @@ export default function Topics() {
     const updatedTopic = { ...topic };
     updatedTopic.isDone = event.target.checked;
 
-    // Make a PUT request to update the completion status in the database
     axios
       .put(`https://gate-backend.onrender.com/topics/${topic._id}`, { isDone: event.target.checked })
       .then((response) => {
@@ -60,59 +66,55 @@ export default function Topics() {
 
   return (
     <div className="container">
-      <h1>Available Topics
+      <h1>
+        Available Topics
         <Link to="/Form" className="btn btn-primary">
           Add Topic
         </Link>
       </h1>
 
-      {topics.map((topic) => (
-        <div key={topic._id} className={`card ${topic.isDone ? 'completed' : ''}`}>
-          <div className="card-body">
-            <h5 className="card-title">{topic.Topic}</h5>
-            <p className="card-text">{topic.Description}</p>
-            <a
-              href={topic.YoutubeLink}
-              className="btn btn-primary"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              View on YouTube
-            </a>
-            <button
-              className="btn btn-secondary"
-              onClick={() => openPdf(topic.Pdf)}
-            >
-              View PDF
-            </button>
-            <button
-              className="btn btn-secondary"
-              onClick={() => downloadPdf(topic.Pdf)}
-            >
-              Download PDF
-            </button>
-            {currentTopicPdf === topic.Pdf && (
-              <Document
-                file={topic.Pdf}
-                onLoadSuccess={onDocumentLoadSuccess}
-              >
-                {Array.from(new Array(numPages), (el, index) => (
-                  <Page key={`page_${index + 1}`} pageNumber={index + 1} />
-                ))}
-              </Document>
-            )}
-
-            <label>
-              <input
-                type="checkbox"
-                checked={topic.isDone}
-                onChange={(event) => handleCheckboxChange(event, topic)}
-              />
-              Mark as Completed
-            </label>
-          </div>
+      {loading ? (
+        <div className="spinner-border" role="status">
+          <span className="sr-only">Loading...</span>
         </div>
-      ))}
+      ) : error ? (
+        <div className="alert alert-danger">{error}</div>
+      ) : (
+        topics.map((topic) => (
+          <div key={topic._id} className={`card ${topic.isDone ? 'completed' : ''}`}>
+            <div className="card-body">
+              <h5 className="card-title">{topic.Topic}</h5>
+              
+              <p className="card-text">{topic.Description}</p>
+              <div className="form-check">
+                <input
+                  type="checkbox"
+                  className="form-check-input"
+                  checked={topic.isDone}
+                  onChange={(event) => handleCheckboxChange(event, topic)}
+                />
+                <label className="form-check-label">Mark as Completed</label>
+              </div>
+              <button className="btn btn-secondary" onClick={() => openPdf(topic.Pdf)}>
+                View PDF
+              </button>
+              <button className="btn btn-secondary" onClick={() => downloadPdf(topic.Pdf)}>
+                Download PDF
+              </button>
+              <a href={topic.YoutubeLink} target="_blank" rel="noopener noreferrer">
+                <FontAwesomeIcon icon={faYoutube} style={{ fontSize: '45px', color: 'red' }} />
+              </a>
+              {currentTopicPdf === topic.Pdf && (
+                <Document file={topic.Pdf} onLoadSuccess={onDocumentLoadSuccess}>
+                  {Array.from(new Array(numPages), (el, index) => (
+                    <Page key={`page_${index + 1}`} pageNumber={index + 1} />
+                  ))}
+                </Document>
+              )}
+            </div>
+          </div>
+        ))
+      )}
     </div>
   );
 }
