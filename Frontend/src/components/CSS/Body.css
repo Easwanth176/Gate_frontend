@@ -1,0 +1,80 @@
+h1{
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: #000;
+    margin-bottom: 1rem;
+    text-align: center;
+    margin-top: 1rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    padding: 1rem;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 10px 10px 10px 10px rgba(0,0,0,0.2);
+}
+body{
+    background-color: #e5e5e5;
+}
+.card{
+    margin-bottom: 1rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    padding: 1rem;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 10px 10px 10px 10px rgba(0,0,0,0.2);
+}
+
+.card-img-top
+{
+    border-radius: 10px;
+    height: 28rem;
+
+}
+.card-title
+{
+    /* make attractive tittle */
+    font-size: 1.7rem;
+    font-weight: 650;
+    color: #000;
+ 
+}
+.card-text
+{
+    /* make attractive tittle */
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: #000;
+ 
+}
+/* <a href="#" className="btn btn-primary">
+               Start Learning
+              </a> */
+
+.btn-primary
+{
+    background-color: #ff9900;
+    border-color: #ff9900;
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: 600;
+    border-radius: 10px;
+    padding: 0.5rem 1rem;
+    margin-left: 15rem;
+    margin-right: 2rem;
+    transition: all 0.3s ease-in-out;
+}
+
+.btn-primary:hover
+{
+    background-color: #dd890c;
+    border-color: #dd890c;
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: 600;
+    border-radius: 10px;
+    padding: 0.5rem 1rem;
+    margin-left: 15rem;
+    margin-right: 2rem;
+    transition: all 0.3s ease-in-out;
+}
