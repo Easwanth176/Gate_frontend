@@ -7,7 +7,7 @@ export default function Video() {
 
   useEffect(() => {
     axios
-      .get('http://localhost:5000/youtube-links')
+      .get('https://gate-backend.onrender.com/youtube-links')
       .then((response) => {
         console.log('YouTube links:', response.data);
         setVideos(response.data);

@@ -75,7 +75,7 @@ export default function FormComponent() {
 
       try {
         const response = await axios.post(
-          'http://localhost:5000/submitForm',
+          'https://gate-backend.onrender.com/submitForm',
           formDataToSend,
           {
             headers: {

@@ -15,7 +15,7 @@ export default function Topics() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/topics/${topicName}`)
+      .get(`https://gate-backend.onrender.com/topics/${topicName}`)
       .then((response) => {
         setTopics(response.data);
       })
