@@ -31,7 +31,7 @@ export default function Topics() {
 
     // Make a PUT request to update the completion status in the database
     axios
-      .put(`http://localhost:5000/topics/${topic._id}`, { isDone: event.target.checked })
+      .put(`https://gate-backend.onrender.com/topics/${topic._id}`, { isDone: event.target.checked })
       .then((response) => {
         // Handle the response as needed
       })
