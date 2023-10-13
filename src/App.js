@@ -7,6 +7,8 @@ import Entry from './components/Java Script/Entry';
 import Topics from './components/Java Script/Topics';
 import Form from './components/Java Script/Form';
 import Video from './components/Java Script/Video';
+import Notes from './components/Java Script/Notes';
+import Mock from "./components/Java Script/Mock";
 
 function App() {
   return (
@@ -21,6 +23,8 @@ function App() {
           <Route path="/form" element={<Form />} />
           <Route path="/topics/:topicName" element={<Topics />} />
           <Route path="/video" element={<Video />} />
+          <Route path="/notes" element={<Notes />} />
+          <Route path="/mock" element={<Mock />} />
         </Routes>
       </BrowserRouter>
     </div>

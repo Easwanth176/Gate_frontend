@@ -47,7 +47,7 @@ export default function MyNavbar() {
             Notes
           </Link>
           <Link
-            to="/mock-test"
+            to="/mock"
             className="nav-link"
             style={navLinkStyle}
             onClick={handleLinkClick}

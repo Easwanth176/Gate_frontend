@@ -1,53 +1,62 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState } from 'react';
 import '../CSS/Video.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 
 export default function Video() {
-  const [loading, setLoading] = useState(true); // Initial loading state
-  const [videos, setVideos] = useState([]);
+  const [videoUrl, setVideoUrl] = useState('');
+  const [videoSummary, setVideoSummary] = useState('Your content will be provided here.');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
-  useEffect(() => {
-    axios
-      .get('https://gate-backend.onrender.com/youtube-links')
-      .then((response) => {
-        console.log('YouTube links:', response.data);
-        setVideos(response.data);
-      })
-      .catch((error) => {
-        console.error('Error fetching YouTube links:', error);
-      })
-      .finally(() => {
-        // Set loading to false when data fetching is complete (whether successful or not)
-        setLoading(false);
-      });
-  }, []);
+  const handleVideoUrlChange = (e) => {
+    setVideoUrl(e.target.value);
 
-  // Render the header outside of the loop
-  const header = <h1>Gate Preparation Videos</h1>;
+    // Clear the error when the user changes the URL
+    if (error) {
+      setError('');
+    }
+  };
+
+  const isValidURL = (url) => {
+    // Regular expression to validate URL (basic validation)
+    const pattern = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i;
+    return pattern.test(url);
+  };
+
+  const handleSubmit = async () => {
+    if (!isValidURL(videoUrl)) {
+      setError('Please enter a valid URL');
+      return;
+    }
+
+    setVideoSummary('');
+    setLoading(true);
+
+    // Simulate an API request delay
+    await new Promise((resolve) => setTimeout(resolve, 3000));
+
+    setLoading(false);
+    setVideoSummary('Unable to process the data');
+  };
 
   return (
-    <div className="container1">
-      {loading ? (
-        // Display the spinning loading spinner while data is being fetched
-        <div className="loading-spinner"></div>
-      ) : (
-        // Display the content when data is ready
-        <div>
-          {header}
-          <div className="video-list">
-            {videos.map((video, index) => (
-              <div key={index} className="video-item">
-                <iframe
-                  src={video.YoutubeLink}
-                  title={video.title}
-                  className="video-responsive"
-                ></iframe>
-                <h3>{video.title}</h3>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
+    <div className="container">
+      <h1>Video Summarization</h1>
+      <div className="search-container">
+        <input
+          type="text"
+          placeholder="Enter video URL"
+          value={videoUrl}
+          onChange={handleVideoUrlChange}
+        />
+        <button onClick={handleSubmit}>Submit</button>
+        {error && <p className="error-message">{error}</p>}
+      </div>
+      <div className={`summary-container ${loading ? 'loading' : ''}`}>
+        {loading && <FontAwesomeIcon icon={faSpinner} spin size="5x" />}
+        {!loading && <p>{videoSummary}</p>}
+      </div>
     </div>
   );
 }
